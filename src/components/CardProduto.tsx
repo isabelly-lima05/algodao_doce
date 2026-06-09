@@ -1,3 +1,5 @@
+"use client";
+
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
@@ -8,6 +10,8 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import Image from "next/image"
+import { ShoppingCart } from "lucide-react"
+import { useCart } from "@/context/CartContext"
 
 interface CardProdutoProps {
   id: string | number
@@ -19,6 +23,7 @@ interface CardProdutoProps {
 }
 
 export default function CardProduto({
+  id,
   title,
   description,
   price,
@@ -30,6 +35,8 @@ export default function CardProduto({
     style: "currency",
     currency: "BRL",
   }).format(price)
+
+  const { addProduct } = useCart()
 
   return (
     <Card className="group flex flex-col h-full overflow-hidden border-stone-200 shadow-sm transition duration-300 hover:-translate-y-2 hover:shadow-lg dark:border-stone-800 dark:shadow-stone-900/20">
@@ -68,8 +75,21 @@ export default function CardProduto({
             {formattedPrice}
           </p>
         </div>
-        <Button variant="secondary" size="sm" className="transition duration-300 hover:scale-105">
-          Comprar
+        <Button
+          variant="secondary"
+          size="sm"
+          className="transition duration-300 hover:scale-105"
+          onClick={() =>
+            addProduct({
+              id: String(id),
+              title,
+              price,
+              imageSrc,
+            })
+          }
+        >
+          <ShoppingCart className="mr-2 h-4 w-4" />
+          Adicionar
         </Button>
       </CardFooter>
     </Card>

@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { ShoppingCart } from "lucide-react";
+import { useCart } from "@/context/CartContext";
 import {
   Card,
   CardDescription,
@@ -13,6 +15,7 @@ import {
 
 interface ProductCardProps {
   product: {
+    id?: string;
     name: string;
     category: string;
     price: number;
@@ -22,6 +25,7 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product }: ProductCardProps) {
+  const { addProduct } = useCart();
   const imgSrc = product.image || "/produtos/placeholder.png";
   const formattedPrice = new Intl.NumberFormat("pt-BR", {
     style: "currency",
@@ -63,8 +67,20 @@ export function ProductCard({ product }: ProductCardProps) {
             {formattedPrice}
           </p>
         </div>
-        <Button variant="secondary" size="sm">
-          Comprar
+        <Button
+          variant="secondary"
+          size="sm"
+          onClick={() =>
+            addProduct({
+              id: product.id ?? product.name,
+              title: product.name,
+              price: product.price,
+              imageSrc: imgSrc,
+            })
+          }
+        >
+          <ShoppingCart className="mr-2 h-4 w-4" />
+          Adicionar
         </Button>
       </CardFooter>
     </Card>
