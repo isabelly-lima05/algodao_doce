@@ -1,0 +1,330 @@
+[
+  {
+    "id": "inverno-1",
+    "name": "Conjunto Canelado Soft",
+    "category": "Inverno",
+    "price": 250,
+    "description": "Conjunto confeccionado em malha canelada de toque macio com delicada estampa de corações, ideal para manter o bebê confortável and protegido nos dias frios.",
+    "image": "/produtos/Inverno.png",
+    "destaque": true
+  },
+  {
+    "id": "inverno-2",
+    "name": "Conjunto de Tricô Classic",
+    "category": "Inverno",
+    "price": 320,
+    "description": "Conjunto sofisticado de tricô composto por colete trançado, calça confortável, camisa de gola polo, luvas e sapatinhos coordenados.",
+    "image": "/produtos/Inverno (2).png"
+  },
+  {
+    "id": "inverno-3",
+    "name": "Conjunto Macacão Terracota",
+    "category": "Inverno",
+    "price": 185,
+    "description": "Conjunto aconchegante em tricô antialérgico composto por macacão com gola bordada, manta combinando, luvas e sapatinhos de ursinho.",
+    "image": "/produtos/Inverno (3).png"
+  },
+  {
+    "id": "inverno-4",
+    "name": "Macacão Peluciado Ursinho",
+    "category": "Inverno",
+    "price": 210,
+    "description": "Macacão quentinho em tecido peluciado com capuz protetor, aplique de ursinho no peito e sapatinhos coordenados.",
+    "image": "/produtos/Inverno (4).png"
+  },
+
+  {
+    "id": "outono-1",
+    "name": "Conjunto Jardineira Outono",
+    "category": "Outono",
+    "price": 410,
+    "description": "Look charmoso composto por jardineira com detalhes de babados em tom terroso e batinha de manga longa com estampa delicada.",
+    "image": "/produtos/Outono.png"
+  },
+  {
+    "id": "outono-2",
+    "name": "Romper Veludo Cotelê",
+    "category": "Outono",
+    "price": 295,
+    "description": "Conjunto delicado com romper em veludo cotelê macio, bordados florais artesanais e batinha interna de gola trabalhada.",
+    "image": "/produtos/Outono (2).png"
+  },
+  {
+    "id": "outono-3",
+    "name": "Jardineira Animais da Savana",
+    "category": "Outono",
+    "price": 260,
+    "description": "Jardineira unissex confeccionada em tecido leve com estampa lúdica de animais, acompanhada de camiseta básica confortável.",
+    "image": "/produtos/Outono (3).png"
+  },
+  {
+    "id": "outono-4",
+    "name": "Conjunto Safari Dinossauro",
+    "category": "Outono",
+    "price": 175,
+    "description": "Conjunto casual composto por camiseta com estampa divertida de dinossauros e short de sarja com amarração frontal decorativa.",
+    "image": "/produtos/Outono (4).png"
+  },
+
+  {
+    "id": "verao-1",
+    "name": "Kit Bodys Canelados",
+    "category": "Verão",
+    "price": 230,
+    "description": "Kit versátil com bodys de manga curta em malha canelada leve, apresentando estampas divertidas de dinossauros e padronagem listrada.",
+    "image": "/produtos/Verão.png"
+  },
+  {
+    "id": "verao-2",
+    "name": "Conjunto Listrado Ursinho",
+    "category": "Verão",
+    "price": 180,
+    "description": "Conjunto de passeio leve composto por camiseta listrada em tons neutros com aplique de ursinho e short confortável com bolsos.",
+    "image": "/produtos/Verão (2).png"
+  },
+  {
+    "id": "verao-3",
+    "name": "Conjunto Floral com Laços",
+    "category": "Verão",
+    "price": 210,
+    "description": "Duas peças charmosas em tecido fresco com estampa floral azul, composto por blusa de alça com amarração em laço e short combinando.",
+    "image": "/produtos/Verão (3).png"
+  },
+  {
+    "id": "verao-4",
+    "name": "Conjunto Batinha Borboletas",
+    "category": "Verão",
+    "price": 275,
+    "description": "Conjunto leve e arejado para o verão, composto por batinha de alça com estampa de borboletas e short com babados no bumbum.",
+    "image": "/produtos/Verão (4).png",
+    "destaque": true
+  },
+
+  {
+    "id": "primavera-1",
+    "name": "Conjunto Vestido e Cardigan",
+    "category": "Primavera",
+    "price": 295,
+    "description": "Conjunto clássico composto por vestido de alças em laço com estampa floral miúda, casaquinho de tricô leve, touca e tapa-fralda coordenados.",
+    "image": "/produtos/Primavera.png",
+    "destaque": true
+  },
+  {
+    "id": "primavera-2",
+    "name": "Romper Floral Manga Longa",
+    "category": "Primavera",
+    "price": 220,
+    "description": "Romper delicado de manga longa com lastex no peito, estampa de mini florzinhas e faixa de cabelo com laço combinando.",
+    "image": "/produtos/Primavera (2).png"
+  },
+  {
+    "id": "primavera-3",
+    "name": "Conjunto Body Dinossauro",
+    "category": "Primavera",
+    "price": 340,
+    "description": "Conjunto prático para o dia a dia composto por body verde de manga curta com estampa lúdica de dinossauro e short básico escuro.",
+    "image": "/produtos/Primavera (3).png"
+  },
+  {
+    "id": "primavera-4",
+    "name": "Conjunto Casual Ursinho",
+    "category": "Primavera",
+    "price": 195,
+    "description": "Look confortável e moderno composto por camiseta branca de algodão com aplique de ursinho de pelúcia e calça de moletom cinza mescla.",
+    "image": "/produtos/Primavera (4).png"
+  },
+
+  {
+    "id": "tematico-1",
+    "name": "Macacão Peluciado Vaquinha",
+    "category": "Tematico",
+    "price": 430,
+    "description": "Macacão quentinho em tecido macio de carneirinho com estampa de vaquinha e capuz com detalhes de orelhinhas.",
+    "image": "/produtos/Tematico.png",
+    "destaque": true
+  },
+  {
+    "id": "tematico-2",
+    "name": "Conjunto Temático Pooh",
+    "category": "Tematico",
+    "price": 175,
+    "description": "Conjunto temático inspirado no Ursinho Pooh, composto por body de manga longa com o rostinho do personagem, calça estampada e touca com orelhinhas.",
+    "image": "/produtos/Tematico (2).png"
+  },
+  {
+    "id": "tematico-3",
+    "name": "Romper Temático Fada",
+    "category": "Tematico",
+    "price": 245,
+    "description": "Romper delicado inspirado na personagem Tinker Bell, com detalhes de tule, saia em formato de pétalas e delicadas asas nas costas.",
+    "image": "/produtos/Tematico (3).png"
+  },
+  {
+    "id": "tematico-4",
+    "name": "Conjunto Jardineira Pooh",
+    "category": "Tematico",
+    "price": 360,
+    "description": "Look divertido composto por jardineira estampada com os personagens clássicos da floresta, camiseta básica interna e chapéu estilo pescador combinando.",
+    "image": "/produtos/Tematico (4).png"
+  },
+  {
+    "id": "inverno-5",
+    "name": "Macacão Rosa",
+    "category": "Inverno",
+    "price": 275,
+    "description": "Macacão em tricô leve na cor rosa com delicada textura de poás, gola Peter Pan branca com bordados florais e detalhe de laço no peito com pingente de coração dourado.",
+    "image": "/produtos/Inverno (5).png"
+  },
+  {
+    "id": "inverno-6",
+    "name": "Conjunto Soft Tigrão",
+    "category": "Inverno",
+    "price": 215,
+    "description": "Conjunto aconchegante em tecido soft azul composto por blusa de manga longa com aplicação bordada do personagem Tigrão e calça jogger combinando.",
+    "image": "/produtos/Inverno (6).png"
+  },
+  {
+    "id": "inverno-7",
+    "name": "Conjunto Urso Astronauta",
+    "category": "Inverno",
+    "price": 240,
+    "description": "Conjunto composto por body de manga longa creme com estampa de ursinho astronauta e calça em malha canelada azul clara com amarração decorativa na cintura.",
+    "image": "/produtos/Inverno (7).png"
+  },
+  {
+    "id": "inverno-8",
+    "name": "Macacão Tricô Borboletas",
+    "category": "Inverno",
+    "price": 290,
+    "description": "Macacão em tricô de tom vermelho fechado de manga longa, decorado com cinco pequenas borboletas em tecido florido aplicadas delicadamente ao redor da gola.",
+    "image": "/produtos/Inverno (8).png"
+  },
+  {
+    "id": "outono-5",
+    "name": "Conjunto Pooh 3 Peças",
+    "category": "Outono",
+    "price": 300,
+    "description": "Conjunto composto por body verde claro de manga longa com bolso bordado, calça jogger caramelo com patches do Pooh nos joelhos e colete peluciado com capuz e estampa temática.",
+    "image": "/produtos/Outono (5).png"
+  },
+  {
+    "id": "outono-6",
+    "name": "Saída de Maternidade Trançada",
+    "category": "Outono",
+    "price": 255,
+    "description": "Kit completo em tricô trançado amarelo claro, composto por macacão pé reversível, manta coordenada, touca, luvas e prendedor de chupeta com detalhe de ursinho.",
+    "image": "/produtos/Outono (6).png"
+  },
+  {
+    "id": "outono-7",
+    "name": "Conjunto Tricô Carro",
+    "category": "Outono",
+    "price": 220,
+    "description": "Conjunto em tricô creme com casaco de botões apresentando bordado de carro amarelo, calça coordenada, body de gola Peter Pan e manta lisa.",
+    "image": "/produtos/Outono (7).png"
+  },
+  {
+    "id": "outono-8",
+    "name": "Conjunto Urso Teddy",
+    "category": "Outono",
+    "price": 190,
+    "description": "Conjunto composto por body canelado bege de manga longa com patch de urso marrom e calça jogger cinza estampada com padrão corrido de ursinhos.",
+    "image": "/produtos/Outono (8).png"
+  },
+  {
+    "id": "verao-5",
+    "name": "Jardineira Jeans Morangos",
+    "category": "Verão",
+    "price": 250,
+    "description": "Jardineira em jeans escuro com bolsos e bordados detalhados de morangos e flores, acompanhada de blusa branca de manga curta com gola Peter Pan branca bordada.",
+    "image": "/produtos/Verão (5).png"
+  },
+  {
+    "id": "verao-6",
+    "name": "Jardineira Snoopy Beisebol",
+    "category": "Verão",
+    "price": 225,
+    "description": "Jardineira jeans curta clássica com estampa do Snoopy jogador de beisebol na perna, acompanhada de camiseta raglan de manga curta listrada com mangas azuis e gola vermel.",
+    "image": "/produtos/Verão (6).png"
+  },
+  {
+    "id": "verao-7",
+    "name": "Jardineira Relâmpago McQueen",
+    "category": "Verão",
+    "price": 195,
+    "description": "Jardineira jeans escura resistente com patch bordado do personagem Relâmpago McQueen na altura do peito, bolsos utilitários e detalhes de puxadores em amarelo nos bolsos.",
+    "image": "/produtos/Verão (7).png"
+  },
+  {
+    "id": "verao-8",
+    "name": "Conjunto Moranguinho",
+    "category": "Verão",
+    "price": 265,
+    "description": "Conjunto composto por blusa bege de manga curta com babados rosa nos ombros e bordado frontal da personagem Moranguinho, acompanhada de saia jeans com barra em babado xadrez rosa.",
+    "image": "/produtos/Verão (8).png"
+  },
+  {
+    "id": "primavera-5",
+    "name": "Jardineira Snoopy Safari",
+    "category": "Primavera",
+    "price": 245,
+    "description": "Jardineira em tecido xadrez marrom e bege com tema de safari, apresentando estampa do Snoopy no bolso superior e na barra com detalhes em verde oliva.",
+    "image": "/produtos/Primavera (5).png"
+  },
+  {
+    "id": "primavera-6",
+    "name": "Romper Fantasma de Veludo",
+    "category": "Primavera",
+    "price": 245,
+    "description": "Romper confeccionado em veludo cotelê preto com patch de fantasma branco no peito, alças ajustáveis com botões e fechamento inferior com botões de pressão.",
+    "image": "/produtos/Primavera (6).png"
+  },
+  {
+    "id": "primavera-7",
+    "name": "Romper Preto de Florzinha",
+    "category": "Primavera",
+    "price": 245,
+    "description": "Romper de manga longa na cor preta, apresentando gola Peter Pan branca com bordados de mini flores rosas e acabamento rendado delicado.",
+    "image": "/produtos/Primavera (7).png"
+  },
+  {
+    "id": "primavera-8",
+    "name": "Conjunto Bunny Listrado",
+    "category": "Primavera",
+    "price": 245,
+    "description": "Conjunto de duas peças composto por camiseta de manga curta listrada em rosa e branco e jardineira creme com grande patch de coelho rosa e cauda em pompom 3D.",
+    "image": "/produtos/Primavera (8).png"
+  },
+  {
+    "id": "tematico-5",
+    "name": "Fantasia Crochê Branca de Neve",
+    "category": "Tematico",
+    "price": 430,
+    "description": "Vestido artesanal em crochê inspirado na Branca de Neve com saia amarela, corpete azul com gola branca, tiara com laço e sapatinhos combinando.",
+    "image": "/produtos/Tematico (8).png"
+  },
+  {
+    "id": "tematico-6",
+    "name": "Fantasia Crochê Stitch",
+    "category": "Tematico",
+    "price": 370,
+    "description": "Conjunto temático artesanal em crochê do Stitch, contendo jardineira azul com bolso frontal do personagem, gorro com grandes orelhas tridimensionais e cordão decorativo.",
+    "image": "/produtos/Tematico (7).png"
+  },
+  {
+    "id": "tematico-7",
+    "name": "Fantasia Crochê Rapunzel",
+    "category": "Tematico",
+    "price": 310,
+    "description": "Fantasia em crochê inspirada na Rapunzel, composta por vestido lilás e roxo com detalhes de trançado rosa, peruca de trança longa amarela decorada com flores e sapatinhos.",
+    "image": "/produtos/Tematico (6).png"
+  },
+  {
+    "id": "tematico-8",
+    "name": "Conjunto Jardineira Mickey",
+    "category": "Tematico",
+    "price": 275,
+    "description": "Conjunto composto por camiseta preta básica de manga curta e jardineira creme em tecido leve com estampa frontal do Mickey Mouse em traços pretos.",
+    "image": "/produtos/Tematico (5).png"
+  }
+]
