@@ -4,6 +4,7 @@ import Link from "next/link"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { useCart } from "@/context/CartContext"
+import { jsPDF } from "jspdf"
 import {
   CheckCircle2,
   MinusCircle,
@@ -45,6 +46,15 @@ export default function CarrinhoPage() {
   } = useCart()
   const [feedback, setFeedback] = useState("")
   const [cep, setCep] = useState("")
+  const [paymentMethod, setPaymentMethod] = useState("Cartão de Crédito")
+  const [isGeneratingInvoice, setIsGeneratingInvoice] = useState(false)
+
+  const paymentMethods = [
+    "Cartão de Crédito",
+    "PIX",
+    "Boleto",
+    "Débito",
+  ]
 
   const digitsOnly = cep.replace(/\D/g, "")
   const shippingInfo = getShippingInfo(digitsOnly)
@@ -53,13 +63,90 @@ export default function CarrinhoPage() {
     style: "currency",
     currency: "BRL",
   }).format(totalPrice)
-  const formattedShipping = shippingCost === null ? "—" : new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(shippingCost)
-  const formattedOrderTotal = new Intl.NumberFormat("pt-BR", {
-    style: "currency",
-    currency: "BRL",
-  }).format(totalPrice + (shippingCost ?? 0))
 
-  const handleCheckout = () => {
+  const formatCurrency = (value: number) =>
+    new Intl.NumberFormat("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    }).format(value)
+
+  const loadImageDataUrl = async (src: string) => {
+    const response = await fetch(src)
+    const blob = await response.blob()
+    return await new Promise<string>((resolve, reject) => {
+      const reader = new FileReader()
+      reader.onloadend = () => {
+        if (typeof reader.result === "string") {
+          resolve(reader.result)
+        } else {
+          reject(new Error("Não foi possível carregar a imagem do logo."))
+        }
+      }
+      reader.onerror = reject
+      reader.readAsDataURL(blob)
+    })
+  }
+
+  const generateInvoicePdf = async () => {
+    const doc = new jsPDF({ unit: "pt", format: "a4" })
+    const logo = await loadImageDataUrl("/logo/Logo.png")
+
+    doc.addImage(logo, "PNG", 40, 40, 80, 80)
+    doc.setFontSize(24)
+    doc.setTextColor("#b91c1c")
+    doc.text("Algodão Doce", 140, 60)
+    doc.setFontSize(11)
+    doc.setTextColor("#374151")
+    doc.text("Nota Fiscal de Compra", 140, 80)
+    doc.setFontSize(10)
+    doc.setTextColor("#6b7280")
+    doc.text(`Data: ${new Date().toLocaleDateString("pt-BR")}`, 140, 100)
+
+    doc.setDrawColor(226)
+    doc.setLineWidth(0.5)
+    doc.line(40, 130, 555, 130)
+
+    let y = 150
+    doc.setFontSize(12)
+    doc.setTextColor("#111827")
+    doc.text("Produtos comprados", 40, y)
+    y += 18
+
+    doc.setFontSize(10)
+    items.forEach((item, index) => {
+      const productY = y + index * 28
+      doc.text(`${item.title}`, 40, productY)
+      doc.text(`Qtd: ${item.quantity}`, 40, productY + 12)
+      doc.text(`Unitário: ${formatCurrency(item.price)}`, 220, productY)
+      doc.text(`Total: ${formatCurrency(item.price * item.quantity)}`, 420, productY)
+    })
+
+    y += items.length * 28 + 18
+    doc.setFontSize(11)
+    doc.setTextColor("#111827")
+    doc.text("Resumo de pagamento", 40, y)
+    y += 18
+    doc.setFontSize(10)
+    doc.text(`Forma de pagamento: ${paymentMethod}`, 40, y)
+    y += 14
+    doc.text(`CEP: ${cep || "Não informado"}`, 40, y)
+    y += 14
+    doc.text(`Valor do frete: ${shippingCost !== null ? formatCurrency(shippingCost) : "—"}`, 40, y)
+    y += 14
+    doc.text(`Total com frete: ${formatCurrency(totalPrice + (shippingCost ?? 0))}`, 40, y)
+
+    y += 30
+    doc.setFontSize(9)
+    doc.setTextColor("#6b7280")
+    doc.text("Obrigado por comprar na Algodão Doce. Este documento é sua nota fiscal de compra.", 40, y)
+
+    doc.save("nota-fiscal-algodao-doce.pdf")
+  }
+
+  const formattedShipping = shippingCost === null ? "—" : formatCurrency(shippingCost)
+  const formattedOrderTotal = formatCurrency(totalPrice + (shippingCost ?? 0))
+
+  const handleCheckout = async () => {
     if (items.length === 0) return
     if (!shippingInfo.isValid) {
       setFeedback("Por favor, informe um CEP válido para calcular o frete.")
@@ -67,10 +154,16 @@ export default function CarrinhoPage() {
       return
     }
 
-    clearCart()
-    setCep("")
-    setFeedback("Compra realizada com sucesso!")
-    window.setTimeout(() => setFeedback(""), 3000)
+    setIsGeneratingInvoice(true)
+    try {
+      await generateInvoicePdf()
+      clearCart()
+      setCep("")
+      setFeedback("Compra realizada com sucesso! Nota fiscal em PDF baixada.")
+    } finally {
+      setIsGeneratingInvoice(false)
+      window.setTimeout(() => setFeedback(""), 3000)
+    }
   }
 
   const handleCepChange = (value: string) => {
@@ -229,6 +322,20 @@ export default function CarrinhoPage() {
                       className="mt-2 w-full rounded-2xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-900 outline-none transition focus:border-rose-500 focus:ring-2 focus:ring-rose-100 dark:border-stone-800 dark:bg-stone-950 dark:text-stone-100"
                     />
                   </label>
+                  <label className="mt-4 block text-sm font-medium text-stone-700 dark:text-stone-200">
+                    Forma de pagamento
+                    <select
+                      value={paymentMethod}
+                      onChange={(event) => setPaymentMethod(event.target.value)}
+                      className="mt-2 w-full rounded-2xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-900 outline-none transition focus:border-rose-500 focus:ring-2 focus:ring-rose-100 dark:border-stone-800 dark:bg-stone-950 dark:text-stone-100"
+                    >
+                      {paymentMethods.map((method) => (
+                        <option key={method} value={method}>
+                          {method}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
                   <p className="mt-3 text-sm text-stone-500 dark:text-stone-400">{shippingInfo.label}</p>
                 </div>
 
@@ -252,10 +359,10 @@ export default function CarrinhoPage() {
                   type="button"
                   className="w-full rounded-[1.5rem] bg-rose-500 text-white hover:bg-rose-600 focus-visible:ring-rose-500"
                   onClick={handleCheckout}
-                  disabled={items.length === 0 || !shippingInfo.isValid}
+                  disabled={items.length === 0 || !shippingInfo.isValid || isGeneratingInvoice}
                 >
                   <CheckCircle2 className="mr-2 h-4 w-4" />
-                  Finalizar compra
+                  {isGeneratingInvoice ? "Gerando nota fiscal..." : "Finalizar compra"}
                 </Button>
 
                 {feedback ? (
