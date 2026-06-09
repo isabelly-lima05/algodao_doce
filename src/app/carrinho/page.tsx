@@ -12,6 +12,27 @@ import {
   Trash2,
 } from "lucide-react"
 
+function getShippingInfo(cepDigits: string) {
+  if (cepDigits.length !== 8 || Number.isNaN(Number(cepDigits))) {
+    return {
+      cost: null as number | null,
+      label: "Digite um CEP válido para calcular o frete.",
+      isValid: false,
+    }
+  }
+
+  const prefix = Number(cepDigits.slice(0, 2))
+  const isSaoPaulo = prefix >= 1 && prefix <= 19
+
+  return {
+    cost: isSaoPaulo ? 0 : 25,
+    label: isSaoPaulo
+      ? "Frete grátis para São Paulo"
+      : "Frete de R$ 25,00 para outros estados",
+    isValid: true,
+  }
+}
+
 export default function CarrinhoPage() {
   const {
     items,
@@ -23,17 +44,39 @@ export default function CarrinhoPage() {
     clearCart,
   } = useCart()
   const [feedback, setFeedback] = useState("")
+  const [cep, setCep] = useState("")
 
+  const digitsOnly = cep.replace(/\D/g, "")
+  const shippingInfo = getShippingInfo(digitsOnly)
+  const shippingCost = shippingInfo.cost
   const formattedTotal = new Intl.NumberFormat("pt-BR", {
     style: "currency",
     currency: "BRL",
   }).format(totalPrice)
+  const formattedShipping = shippingCost === null ? "—" : new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(shippingCost)
+  const formattedOrderTotal = new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  }).format(totalPrice + (shippingCost ?? 0))
 
   const handleCheckout = () => {
     if (items.length === 0) return
+    if (!shippingInfo.isValid) {
+      setFeedback("Por favor, informe um CEP válido para calcular o frete.")
+      window.setTimeout(() => setFeedback(""), 3000)
+      return
+    }
+
     clearCart()
+    setCep("")
     setFeedback("Compra realizada com sucesso!")
     window.setTimeout(() => setFeedback(""), 3000)
+  }
+
+  const handleCepChange = (value: string) => {
+    const digits = value.replace(/\D/g, "").slice(0, 8)
+    const formatted = digits.replace(/(\d{5})(\d{1,3})?/, (_, p1, p2) => (p2 ? `${p1}-${p2}` : p1))
+    setCep(formatted)
   }
 
   return (
@@ -174,16 +217,42 @@ export default function CarrinhoPage() {
               </div>
 
               <div className="mt-6 space-y-4">
+                <div className="rounded-[1.75rem] bg-stone-50 p-5 text-sm text-stone-700 dark:bg-stone-900 dark:text-stone-300">
+                  <p className="font-semibold">Calcular frete</p>
+                  <label className="mt-4 block text-sm font-medium text-stone-700 dark:text-stone-200">
+                    CEP
+                    <input
+                      type="text"
+                      value={cep}
+                      onChange={(event) => handleCepChange(event.target.value)}
+                      placeholder="00000-000"
+                      className="mt-2 w-full rounded-2xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-900 outline-none transition focus:border-rose-500 focus:ring-2 focus:ring-rose-100 dark:border-stone-800 dark:bg-stone-950 dark:text-stone-100"
+                    />
+                  </label>
+                  <p className="mt-3 text-sm text-stone-500 dark:text-stone-400">{shippingInfo.label}</p>
+                </div>
+
                 <div className="rounded-[1.75rem] bg-rose-50 p-5 text-sm text-rose-700 dark:bg-rose-500/10 dark:text-rose-200">
                   <p className="font-semibold">Total</p>
                   <p className="mt-2 text-xl font-semibold text-stone-900 dark:text-stone-100">{formattedTotal}</p>
+                </div>
+
+                <div className="rounded-[1.75rem] bg-stone-50 p-5 text-sm text-stone-700 dark:bg-stone-900 dark:text-stone-300">
+                  <div className="flex items-center justify-between">
+                    <span>Frete</span>
+                    <span className="font-semibold text-stone-900 dark:text-stone-100">{formattedShipping}</span>
+                  </div>
+                  <div className="mt-3 flex items-center justify-between text-base font-semibold text-stone-900 dark:text-stone-100">
+                    <span>Total com frete</span>
+                    <span>{formattedOrderTotal}</span>
+                  </div>
                 </div>
 
                 <Button
                   type="button"
                   className="w-full rounded-[1.5rem] bg-rose-500 text-white hover:bg-rose-600 focus-visible:ring-rose-500"
                   onClick={handleCheckout}
-                  disabled={items.length === 0}
+                  disabled={items.length === 0 || !shippingInfo.isValid}
                 >
                   <CheckCircle2 className="mr-2 h-4 w-4" />
                   Finalizar compra
