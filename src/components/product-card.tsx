@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ShoppingCart } from "lucide-react";
+import { ShoppingCart, Star, TrendingUp } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import {
   Card,
@@ -21,6 +21,8 @@ interface ProductCardProps {
     price: number;
     description: string;
     image: string;
+    rating?: number;
+    sales?: number;
   };
 }
 
@@ -50,11 +52,25 @@ export function ProductCard({ product }: ProductCardProps) {
       </div>
 
       {/* Adicionado "flex-1 flex flex-col" para expandir a área de texto e ocupar o espaço restante */}
-      <CardHeader className="pt-5 flex-1 flex flex-col">
+      <CardHeader className="pt-5 flex-1 flex flex-col gap-4">
         <CardTitle>{product.name}</CardTitle>
-        <CardDescription className="text-sm leading-6 text-stone-500 dark:text-stone-400 mt-2">
+        <CardDescription className="text-sm leading-7 text-stone-500 dark:text-stone-400">
           {product.description}
         </CardDescription>
+        <div className="flex flex-wrap items-center gap-3 text-xs text-stone-500 dark:text-stone-400 pb-4">
+          {typeof product.rating === "number" ? (
+            <span className="inline-flex items-center gap-1 rounded-full bg-stone-100 px-3 py-1 dark:bg-stone-900">
+              <Star className="h-3.5 w-3.5 text-amber-500" />
+              {product.rating.toFixed(1)}
+            </span>
+          ) : null}
+          {typeof product.sales === "number" ? (
+            <span className="inline-flex items-center gap-1 rounded-full bg-stone-100 px-3 py-1 dark:bg-stone-900">
+              <TrendingUp className="h-3.5 w-3.5 text-rose-500" />
+              {product.sales} vendidos
+            </span>
+          ) : null}
+        </div>
       </CardHeader>
 
       {/* Adicionado "mt-auto flex items-end justify-between" para fixar o rodapé na parte inferior de forma alinhada */}
